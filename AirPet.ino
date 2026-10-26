@@ -36,6 +36,7 @@ const uint8_t HIGH_SAMPLES_REQUIRED = 1;
 const uint8_t LOW_SAMPLES_REQUIRED = 3;
 const uint32_t DEMO_MS = 15000UL;  // long enough to see him collapse
 const uint32_t STALE_MS = 10000UL;
+const bool SHOW_VOC = true;  // false hides the VOC reading at the bottom of the screen
 
 bool sensorStarted = false;
 bool haveReading = false;
@@ -848,12 +849,14 @@ void drawScreen(uint32_t now) {
       printShout(petShout);
     }
 
-    oled.setCursor(0, 63);
-    if (fresh) {
-      oled.print(F("VOC: "));
-      oled.print(tvoc);
-      oled.print(F(" ppb"));
-    } else oled.print(F("VOC: -- ppb"));
+    if (SHOW_VOC) {
+      oled.setCursor(0, 63);
+      if (fresh) {
+        oled.print(F("VOC: "));
+        oled.print(tvoc);
+        oled.print(F(" ppb"));
+      } else oled.print(F("VOC: -- ppb"));
+    }
   } while (oled.nextPage());
 }
 

@@ -84,10 +84,18 @@ OLED instead.
 
 ## What's on the screen
 
-- **Bottom line:** current VOC reading, e.g. `VOC: 42 ppb` (`--` while there's no fresh reading).
+- **Bottom line:** current VOC reading, e.g. `VOC: 42 ppb` (`--` while there's no fresh reading). Hidden when `SHOW_VOC` is `false`.
 - **Top left:** `SENSOR ISSUE` if the CCS811 isn't responding, or `DEMO COUGH` during a demo.
 - **Top right:** whatever he's shouting (`HUH?!`, `KOFF!`, `I'M DYING`, `WHY ME?!`,
   `MOMMY`, `IT'S OVER`, `CORNER!!` ...).
+
+To hide the VOC number and keep just the pet, set this near the top of `AirPet.ino` and upload again:
+
+```cpp
+const bool SHOW_VOC = false;
+```
+
+He still reacts to the air the same way. Only the number is hidden.
 
 ## How he behaves
 
@@ -120,6 +128,7 @@ These constants are near the top of `AirPet.ino`:
 | `DEMO_MS` | 15000 | Length of the demo cough |
 | `DRAMA_AFTER_MS` | 6000 | How long bad air lasts before he collapses |
 | `SLEEP_AFTER_MS` | 150000 | How long he stays calm before getting sleepy |
+| `SHOW_VOC` | true | Show the VOC reading at the bottom of the screen (`false` hides it) |
 
 ## Troubleshooting
 
